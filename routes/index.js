@@ -18,7 +18,12 @@ const transporter = nodemailer.createTransport({
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.status(200).json({
+    success : true,
+    data: {
+      message : 'Hello'
+    }
+  })
 });
 
 router.post('/send-mail', upload.single('media'), async function (req, res, next) {
