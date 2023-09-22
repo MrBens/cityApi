@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
   })
 });
 
-router.post('/send-mail', upload.single('media'), async function (req, res, next) {
+router.post('/send-mail', upload.single('media'), function (req, res, next) {
   const {to, cc = null, bcc = null, subject, html} = req.body;
   const media = req.file;
   console.log(media)
@@ -56,7 +56,7 @@ router.post('/send-mail', upload.single('media'), async function (req, res, next
   // console.log(JSON.stringify(mailOptions))
 
   try {
-    // await transporter.sendMail(mailOptions);
+    transporter.sendMail(mailOptions);
     res.status(200).send('Email sent successfully');
   } catch (error) {
     console.error('Error sending email:', error);
