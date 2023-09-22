@@ -9,7 +9,7 @@ const upload = multer({ dest: './uploads/' });
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com', // e.g., Gmail, SMTP server details
   port: 587,
-  // secure: true,
+  secure: true,
   auth: {
     user: 'testforopiom@gmail.com',
     pass: 'phezpefokghhwsww',
@@ -36,24 +36,24 @@ router.post('/send-mail', upload.single('media'), async function (req, res, next
     bcc,
     subject,
     html,
-    // attachments: [
-    //   {
-    //     filename: media.originalname, // Customize the filename as needed
-    //     path: media.path,
-    //   },
-    // ],
-  };
-
-  if (media){
-    mailOptions.attachments = [
+    attachments: [
       {
         filename: media.originalname, // Customize the filename as needed
         path: media.path,
       },
-    ]
-  }
+    ],
+  };
 
-  // console.log(JSON.stringify(mailOptions))
+  // if (media){
+  //   mailOptions.attachments = [
+  //     {
+  //       filename: media.originalname, // Customize the filename as needed
+  //       path: media.path,
+  //     },
+  //   ]
+  // }
+
+  console.log(JSON.stringify(mailOptions))
 
   try {
     await transporter.sendMail(mailOptions);
