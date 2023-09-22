@@ -36,27 +36,27 @@ router.post('/send-mail', upload.single('media'), async function (req, res, next
     bcc,
     subject,
     html,
-    attachments: [
+    // attachments: [
+    //   {
+    //     filename: media.originalname, // Customize the filename as needed
+    //     path: media.path,
+    //   },
+    // ],
+  };
+
+  if (media){
+    mailOptions.attachments = [
       {
         filename: media.originalname, // Customize the filename as needed
         path: media.path,
       },
-    ],
-  };
+    ]
+  }
 
-  // if (media){
-  //   mailOptions.attachments = [
-  //     {
-  //       filename: media.originalname, // Customize the filename as needed
-  //       path: media.path,
-  //     },
-  //   ]
-  // }
-
-  console.log(JSON.stringify(mailOptions))
+  // console.log(JSON.stringify(mailOptions))
 
   try {
-    await transporter.sendMail(mailOptions);
+    // await transporter.sendMail(mailOptions);
     res.status(200).send('Email sent successfully');
   } catch (error) {
     console.error('Error sending email:', error);
